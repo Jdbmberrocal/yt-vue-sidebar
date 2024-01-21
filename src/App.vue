@@ -1,15 +1,24 @@
 <template>
 	<div class="app">
+		
 		<!-- Sidebar -->
-		<Sidebar />
-
+		<Sidebar v-if="$route.name !== 'login' && $route.name !== 'register'"/>
+		<!-- || this.$route.name != 'register' -->
 		<!-- Content -->
 		<router-view />
 	</div>
 </template>
 
 <script setup>
+// import { useRouter } from 'vue-router';
 import Sidebar from './components/Sidebar.vue'
+
+
+// export default {
+
+// };
+
+
 </script>
 
 <style lang="scss">
@@ -53,5 +62,14 @@ button {
 			padding-left: 6rem;
 		}
 	}
+}
+
+.form-control, .form-select{
+	border-radius: 0px !important;
+	border: 1px solid #49df80;
+}
+
+.form-control:focus, .form-select:focus{
+	border: 2px solid #49df80;
 }
 </style>

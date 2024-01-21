@@ -1,7 +1,8 @@
 <template>
 	<aside :class="`${is_expanded ? 'is-expanded' : ''}`">
 		<div class="logo">
-			<img :src="logoURL" alt="Vue" /> 
+			<img :src="logoURL" alt="Vue" />
+			<h4>Jesus</h4> 
 		</div>
 
 		<div class="menu-toggle-wrap">
@@ -16,17 +17,21 @@
 				<span class="material-icons">home</span>
 				<span class="text">Home</span>
 			</router-link>
-			<router-link to="/about" class="button">
+			<router-link to="/impuestos" class="button">
+				<span class="material-icons">list</span>
+				<span class="text">Impuestos</span>
+			</router-link>
+			<router-link to="/empresas" class="button">
 				<span class="material-icons">description</span>
-				<span class="text">About</span>
+				<span class="text">Empresas</span>
 			</router-link>
 			<router-link to="/team" class="button">
-				<span class="material-icons">group</span>
-				<span class="text">Team</span>
+				<span class="material-icons">hourglass_top</span>
+				<span class="text">Vencimientos</span>
 			</router-link>
-			<router-link to="/contact" class="button">
-				<span class="material-icons">email</span>
-				<span class="text">Contact</span>
+			<router-link to="/calendario" class="button">
+				<span class="material-icons">calendar_month</span>
+				<span class="text">Calendario</span>
 			</router-link>
 		</div>
 
@@ -37,12 +42,17 @@
 				<span class="material-icons">settings</span>
 				<span class="text">Settings</span>
 			</router-link>
+			<button type="button" v-on:click="logout" class="button">
+				<span class="material-icons">logout</span>
+				<span class="text">Salir</span>
+			</button>
 		</div>
 	</aside>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router';
 import logoURL from '../assets/logo.png'
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
@@ -50,6 +60,13 @@ const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 const ToggleMenu = () => {
 	is_expanded.value = !is_expanded.value
 	localStorage.setItem("is_expanded", is_expanded.value)
+}
+
+const router = useRouter()
+const logout = () =>{
+	localStorage.removeItem('user')
+	localStorage.removeItem('user_token')
+	router.push("login")
 }
 </script>
 
